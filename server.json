@@ -1,17 +1,26 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.GerardoBarrera/pdfmakerapi-mcp",
+  "title": "PDFMakerAPI",
   "description": "Turn a description into a shareable, editable PDF — invoices, certificates, reports, resumes.",
+  "websiteUrl": "https://pdfmakerapi.com",
   "repository": {
     "url": "https://github.com/GerardoBarrera/pdfmakerapi-mcp",
     "source": "github"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
+  "icons": [
+    {
+      "src": "https://pdfmakerapi.com/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@pdfmakerapi/mcp",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "transport": {
         "type": "stdio"
       }

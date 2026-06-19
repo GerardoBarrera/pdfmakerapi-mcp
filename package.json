@@ -1,6 +1,6 @@
 {
   "name": "@pdfmakerapi/mcp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "mcpName": "io.github.GerardoBarrera/pdfmakerapi-mcp",
   "description": "MCP server for PDFMakerAPI — turn a description into a shareable, editable PDF (invoices, certificates, reports, resumes) from any MCP client (Claude, Cursor, etc.).",
   "type": "module",

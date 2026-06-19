@@ -58,15 +58,15 @@ After the tool returns a url, share it with the user and tell them they can open
 
 const ICONS = [
   {
-    src: "https://raw.githubusercontent.com/GerardoBarrera/pdfmakerapi-mcp/main/icon-400.png",
+    src: "https://pdfmakerapi.com/icon-512.png",
     mimeType: "image/png",
-    sizes: ["400x400"],
+    sizes: ["512x512"],
   },
 ];
 
 const server = new McpServer({
   name: "pdfmakerapi",
-  version: "0.1.4",
+  version: "0.1.5",
   title: "PDFMakerAPI",
   websiteUrl: "https://pdfmakerapi.com",
   icons: ICONS,
@@ -79,10 +79,27 @@ server.registerTool(
     description: `Create a professional, shareable PDF document — invoices, receipts, certificates, reports, resumes, letters, and more. Returns a link that opens the document in the PDFMakerAPI editor, where the user can preview it, edit any field, and download the PDF.\n${DOCUMENT_GUIDE}`,
     inputSchema: {
       document: z
-        .record(z.string(), z.any())
-        .describe(
-          "The PDFMakerAPI Document object to create, following the schema in this tool's description.",
-        ),
+        .object({
+          id: z.string().optional(),
+          name: z.string().optional().describe("Document name."),
+          description: z.string().optional(),
+          pageSize: z
+            .string()
+            .optional()
+            .describe('"letter" | "a4" | "legal" | "letter-landscape" | "a4-landscape" | "square" (default "a4").'),
+          pageBackgroundColor: z.string().optional().describe("Hex color, e.g. #ffffff."),
+          margin: z.string().optional().describe('"none" | "sm" | "md" | "lg" (default "lg").'),
+          gap: z.string().optional().describe('"none" | "sm" | "md" | "lg" (default "lg").'),
+          variables: z
+            .array(z.record(z.string(), z.any()))
+            .optional()
+            .describe("Declared variables; every {{name}} used in content MUST be declared here."),
+          children: z
+            .array(z.record(z.string(), z.any()))
+            .optional()
+            .describe("The document body — an ordered array of nodes (container/text/table/spacer/divider). See the DOCUMENT MODEL above."),
+        })
+        .describe("The PDFMakerAPI Document to create. Follow the DOCUMENT MODEL in this tool's description."),
     },
     outputSchema: {
       url: z
@@ -93,7 +110,6 @@ server.registerTool(
       id: z.string().describe("The stored document id."),
     },
     annotations: {
-      title: "Create PDF Document",
       readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: false,
