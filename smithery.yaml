@@ -1,0 +1,23 @@
+# Smithery configuration — https://smithery.ai/docs/build/project-config
+# Runs the published npm package as a local (stdio) MCP server.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      pdfmakerapiBaseUrl:
+        type: string
+        title: PDFMakerAPI base URL
+        description: Override the API base. Defaults to https://api.pdfmakerapi.com.
+        default: https://api.pdfmakerapi.com
+    required: []
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', '@pdfmakerapi/mcp'],
+      env: config.pdfmakerapiBaseUrl
+        ? { PDFMAKERAPI_BASE_URL: config.pdfmakerapiBaseUrl }
+        : {}
+    })
+exampleConfig:
+  pdfmakerapiBaseUrl: https://api.pdfmakerapi.com
