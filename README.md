@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@pdfmakerapi/mcp)](https://www.npmjs.com/package/@pdfmakerapi/mcp)
 [![smithery badge](https://smithery.ai/badge/gerardobarrera714/pdfmakerapi)](https://smithery.ai/servers/gerardobarrera714/pdfmakerapi)
+[![Glama score](https://glama.ai/mcp/servers/GerardoBarrera/pdfmakerapi-mcp/badges/score.svg)](https://glama.ai/mcp/servers/GerardoBarrera/pdfmakerapi-mcp)
 [![Add to Cursor](https://img.shields.io/badge/Add_to-Cursor-000?logo=cursor)](cursor://anysphere.cursor-deeplink/mcp/install?name=pdfmakerapi&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBwZGZtYWtlcmFwaS9tY3AiXX0=)
 [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Server-0098FF?logo=visualstudiocode)](https://vscode.dev/redirect/mcp/install?name=pdfmakerapi&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40pdfmakerapi%2Fmcp%22%5D%7D)
 
