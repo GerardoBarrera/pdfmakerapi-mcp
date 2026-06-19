@@ -1,6 +1,7 @@
 # PDFMakerAPI MCP server
 
 [![npm](https://img.shields.io/npm/v/@pdfmakerapi/mcp)](https://www.npmjs.com/package/@pdfmakerapi/mcp)
+[![smithery badge](https://smithery.ai/badge/gerardobarrera714/pdfmakerapi)](https://smithery.ai/servers/gerardobarrera714/pdfmakerapi)
 
 An [MCP](https://modelcontextprotocol.io) server for **[PDFMakerAPI](https://pdfmakerapi.com)**. It
 exposes a single `create_document` tool that turns a document description into a **shareable link**
