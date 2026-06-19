@@ -56,23 +56,25 @@ RULES
 After the tool returns a url, share it with the user and tell them they can open it to preview, edit any field, and download the PDF.
 `;
 
-const server = new McpServer({ name: "pdfmakerapi", version: "0.1.0" });
+const server = new McpServer({ name: "pdfmakerapi", version: "0.1.3" });
 
-server.tool(
+server.registerTool(
   "create_document",
-  `Create a professional, shareable PDF document — invoices, receipts, certificates, reports, resumes, letters, and more. Returns a link that opens the document in the PDFMakerAPI editor, where the user can preview it, edit any field, and download the PDF.\n${DOCUMENT_GUIDE}`,
   {
-    document: z
-      .record(z.string(), z.any())
-      .describe(
-        "The PDFMakerAPI Document object to create, following the schema in this tool's description.",
-      ),
+    description: `Create a professional, shareable PDF document — invoices, receipts, certificates, reports, resumes, letters, and more. Returns a link that opens the document in the PDFMakerAPI editor, where the user can preview it, edit any field, and download the PDF.\n${DOCUMENT_GUIDE}`,
+    inputSchema: {
+      document: z
+        .record(z.string(), z.any())
+        .describe(
+          "The PDFMakerAPI Document object to create, following the schema in this tool's description.",
+        ),
+    },
   },
   async ({ document }) => {
     try {
       const res = await fetch(`${API_BASE}/api/v1/documents`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "User-Agent": "pdfmakerapi-mcp" },
         body: JSON.stringify({ document }),
       });
       if (!res.ok) {
