@@ -56,11 +56,26 @@ RULES
 After the tool returns a url, share it with the user and tell them they can open it to preview, edit any field, and download the PDF.
 `;
 
-const server = new McpServer({ name: "pdfmakerapi", version: "0.1.3" });
+const ICONS = [
+  {
+    src: "https://raw.githubusercontent.com/GerardoBarrera/pdfmakerapi-mcp/main/icon-400.png",
+    mimeType: "image/png",
+    sizes: ["400x400"],
+  },
+];
+
+const server = new McpServer({
+  name: "pdfmakerapi",
+  version: "0.1.4",
+  title: "PDFMakerAPI",
+  websiteUrl: "https://pdfmakerapi.com",
+  icons: ICONS,
+});
 
 server.registerTool(
   "create_document",
   {
+    title: "Create PDF Document",
     description: `Create a professional, shareable PDF document — invoices, receipts, certificates, reports, resumes, letters, and more. Returns a link that opens the document in the PDFMakerAPI editor, where the user can preview it, edit any field, and download the PDF.\n${DOCUMENT_GUIDE}`,
     inputSchema: {
       document: z
@@ -68,6 +83,21 @@ server.registerTool(
         .describe(
           "The PDFMakerAPI Document object to create, following the schema in this tool's description.",
         ),
+    },
+    outputSchema: {
+      url: z
+        .string()
+        .describe(
+          "Shareable link that opens the document in the PDFMakerAPI editor to preview, edit, and download the PDF.",
+        ),
+      id: z.string().describe("The stored document id."),
+    },
+    annotations: {
+      title: "Create PDF Document",
+      readOnlyHint: false,
+      destructiveHint: false,
+      idempotentHint: false,
+      openWorldHint: true,
     },
   },
   async ({ document }) => {
@@ -97,6 +127,7 @@ server.registerTool(
             text: `Document created. Open this link to preview, edit any field, and download the PDF:\n${data.url}`,
           },
         ],
+        structuredContent: { url: data.url, id: data.id },
       };
     } catch (err) {
       return {
