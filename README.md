@@ -133,6 +133,15 @@ npm run build   # compile to dist/
 npm run dev     # run from source (tsx)
 ```
 
+## Troubleshooting
+
+- **Server doesn't appear in your client** — restart the client after editing its MCP config, and check the JSON is valid (no trailing commas). For remote clients, confirm the URL is exactly `https://api.pdfmakerapi.com/mcp`.
+- **`npx` fails to start** — ensure Node.js 18+ is installed (`node -v`), then retry `npx -y @pdfmakerapi/mcp@latest`.
+- **Connection / timeout on the remote endpoint** — verify your network/proxy allows HTTPS to `api.pdfmakerapi.com`, and that you're using the Streamable HTTP transport.
+- **"Document is too large"** — documents are capped at ~1 MB of JSON; trim large tables or split into multiple documents.
+- **The returned link won't open** — copy the full link (it ends in a document ID); if it 404s, generate the document again.
+- **Still stuck?** — open a [GitHub issue](https://github.com/GerardoBarrera/pdfmakerapi-mcp/issues) or email support@pdfmakerapi.com.
+
 ## License
 
 MIT
