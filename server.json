@@ -6,15 +6,21 @@
     "url": "https://github.com/GerardoBarrera/pdfmakerapi-mcp",
     "source": "github"
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@pdfmakerapi/mcp",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "transport": {
         "type": "stdio"
       }
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.pdfmakerapi.com/mcp"
     }
   ]
 }
