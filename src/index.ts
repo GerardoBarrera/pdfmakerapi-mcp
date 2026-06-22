@@ -47,6 +47,7 @@ VARIABLES — how data is inserted
 
 RULES
 - Use containers (direction:"row") to place items side by side.
+- Row widths: a direction:"row" container puts ALL children on ONE line (no wrap), so their widths must sum to AT MOST "full" (full=1, 3/4=.75, 2/3≈.67, 1/2=.5, 1/3≈.33, 1/4=.25). 1/3+1/3+1/3, 1/2+1/2, and 2/3+1/3 fit; 1/2+1/2+1/2 (1.5) or 2/3+2/3 overflow and break the layout — split into multiple stacked row containers or use narrower widths.
 - For label/value pairs (dates, totals, "Bill To", reference numbers), nest a direction:"row" container with two text children — a BOLD label (fontWeight:"bold") and the value as a {{variable}} — each with a width (e.g. label "1/3", value "2/3") so they align in columns. Stack such rows in a column container.
 - Use a table node for any repeating rows (line items, attendees) and set rowVariable.
 - Spacing between sections comes from the document "gap" (default "lg") — do NOT insert spacer nodes between top-level sections.
