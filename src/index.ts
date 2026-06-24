@@ -22,7 +22,7 @@ Document:
 - id: string (short slug)
 - name: string
 - description: string (one short sentence)
-- pageSize: "letter" | "a4" | "legal" | "letter-landscape" | "a4-landscape" | "square" (default "a4")
+- pageSize: "letter" | "a4" | "legal" | "letter-landscape" | "a4-landscape" | "square" | "auto" (default "a4"; "auto" = letter width with the height growing to fit the content — use it for certificates/awards so there's no empty space below)
 - pageBackgroundColor: hex string (default "#ffffff")
 - margin: "none" | "sm" | "md" | "lg" — page margin; default "lg"
 - gap: "none" | "sm" | "md" | "lg" — vertical spacing between top-level sections; default "lg"
@@ -33,7 +33,7 @@ Variable: { id, name (snake_case, used as {{name}}), label (human), type: "text"
 
 Node (every node has: id, name, width: "full"|"1/2"|"1/3"|"1/4"|"2/3"|"3/4"|"auto", order: number, align?: "left"|"center"|"right", style?: NodeStyle):
 - container: { type:"container", layout:{ direction:"row"|"column", gap:"none"|"sm"|"md"|"lg", justify?:"start"|"center"|"end"|"between", alignItems?:"start"|"center"|"end"|"stretch" }, children: Node[] }
-- text: { type:"text", content: string (supports \\n and {{vars}}), fontSize?:"xs"|"sm"|"base"|"lg"|"xl", fontWeight?:"normal"|"medium"|"semibold"|"bold" }
+- text: { type:"text", content: string (supports \\n, {{vars}}, and **inline bold** — wrap part of the text in double asterisks to bold just that part, e.g. "Total: **{{total}}**"), fontSize?:"xs"|"sm"|"base"|"lg"|"xl", fontWeight?:"normal"|"medium"|"semibold"|"bold" }
 - table: { type:"table", columns: { id, name (data key), label (header), width?: "40%", align?: "left"|"center"|"right" }[], rowVariable: string }
 - spacer: { type:"spacer", height: "sm"|"md"|"lg"|"xl" }
 - divider: { type:"divider", lineStyle?: "solid"|"dashed"|"dotted" }
@@ -52,6 +52,8 @@ RULES
 - Use a table node for any repeating rows (line items, attendees) and set rowVariable.
 - Spacing between sections comes from the document "gap" (default "lg") — do NOT insert spacer nodes between top-level sections.
 - Table column alignment: left-align text columns, right-align money/number columns, center short codes/status; a header's alignment matches its column.
+- INLINE BOLD: to bold PART of any text, wrap it in **double asterisks** — e.g. a text node's content "Total: **{{total}}**". That's the only way to bold part of a string (no per-run style flag); it also works inside tables — wrap a column's values (or a header label) in ** ** to bold them. Only apply bold where the user actually asks.
+- CERTIFICATES / AWARDS / DIPLOMAS: set pageSize:"auto" so the page grows to fit the content (no empty space below). Center-align the text (align:"center"), make the recipient name large (fontSize:"xl", bold), and place signature lines near the bottom.
 - Every id must be unique. Keep it clean and professional.
 
 After the tool returns a url, share it with the user and tell them they can open it to preview, edit any field, and download the PDF.
@@ -67,7 +69,7 @@ const ICONS = [
 
 const server = new McpServer({
   name: "pdfmakerapi",
-  version: "1.0.0",
+  version: "1.0.2",
   title: "PDFMakerAPI",
   websiteUrl: "https://pdfmakerapi.com",
   icons: ICONS,
@@ -87,7 +89,7 @@ server.registerTool(
           pageSize: z
             .string()
             .optional()
-            .describe('"letter" | "a4" | "legal" | "letter-landscape" | "a4-landscape" | "square" (default "a4").'),
+            .describe('"letter" | "a4" | "legal" | "letter-landscape" | "a4-landscape" | "square" | "auto" (default "a4"; "auto" grows the height to fit — good for certificates/awards).'),
           pageBackgroundColor: z.string().optional().describe("Hex color, e.g. #ffffff."),
           margin: z.string().optional().describe('"none" | "sm" | "md" | "lg" (default "lg").'),
           gap: z.string().optional().describe('"none" | "sm" | "md" | "lg" (default "lg").'),

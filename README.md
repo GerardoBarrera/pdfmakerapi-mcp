@@ -15,6 +15,14 @@ Works with **Claude Desktop, Claude.ai, Cursor, Windsurf, Cline, Zed, VS Code, C
 other MCP client. It's a thin client of the public API at `https://api.pdfmakerapi.com`, so it needs
 no account or credentials of its own.
 
+## What is PDFMakerAPI?
+
+PDFMakerAPI is a PDF template builder and PDF generation API. Instead of hard-coding documents or wrestling with HTML-to-PDF converters that break when your content changes, you design a reusable template once in a visual, no-code editor — placing text, tables, images, and dynamic fields exactly where you want them — then feed it data to produce a finished, editable PDF.
+
+Generate a single document or thousands. Fill a template in yourself, share a link so anyone completes it in the browser as a fillable PDF form, send JSON to the REST API, trigger generation from no-code tools like Zapier, Make, and n8n, or create documents straight from AI agents like Claude and ChatGPT. Prefer to start from a prompt? Describe what you need and let Quill build it.
+
+Teams use PDFMakerAPI for invoices, receipts, certificates, reports, and contracts — anything you'd otherwise rebuild by hand every time the data changes. Start building free with 100 PDFs a month.
+
 ## Quick install
 
 **One-click:**
