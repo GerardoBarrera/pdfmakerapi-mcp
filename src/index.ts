@@ -69,7 +69,7 @@ const ICONS = [
 
 const server = new McpServer({
   name: "pdfmakerapi",
-  version: "1.0.2",
+  version: "1.0.3",
   title: "PDFMakerAPI",
   websiteUrl: "https://pdfmakerapi.com",
   icons: ICONS,
